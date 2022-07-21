@@ -10,13 +10,18 @@ definitions:
     type: object
   dto.BookReponseDto:
     properties:
+      authors:
+        items: {}
+        type: array
+      cover_edition_key:
+        type: string
       cover_id:
         type: number
       edition_count:
-        type: string
+        type: integer
       key:
         type: string
-      name:
+      title:
         type: string
     type: object
   dto.LibrarianFindResponseDto:
@@ -268,13 +273,18 @@ definitions:
     type: object
   models.OrderItem:
     properties:
+      authors:
+        items: {}
+        type: array
+      cover_edition_key:
+        type: string
       cover_id:
         type: number
       edition_count:
-        type: string
+        type: integer
       key:
         type: string
-      name:
+      title:
         type: string
     type: object
   utils.PaginationMetaDto:

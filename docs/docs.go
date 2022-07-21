@@ -831,16 +831,23 @@ const docTemplate = `{
         "dto.BookReponseDto": {
             "type": "object",
             "properties": {
+                "authors": {
+                    "type": "array",
+                    "items": {}
+                },
+                "cover_edition_key": {
+                    "type": "string"
+                },
                 "cover_id": {
                     "type": "number"
                 },
                 "edition_count": {
-                    "type": "string"
+                    "type": "integer"
                 },
                 "key": {
                     "type": "string"
                 },
-                "name": {
+                "title": {
                     "type": "string"
                 }
             }
@@ -1215,16 +1222,23 @@ const docTemplate = `{
         "models.OrderItem": {
             "type": "object",
             "properties": {
+                "authors": {
+                    "type": "array",
+                    "items": {}
+                },
+                "cover_edition_key": {
+                    "type": "string"
+                },
                 "cover_id": {
                     "type": "number"
                 },
                 "edition_count": {
-                    "type": "string"
+                    "type": "integer"
                 },
                 "key": {
                     "type": "string"
                 },
-                "name": {
+                "title": {
                     "type": "string"
                 }
             }
