@@ -18,10 +18,10 @@ import (
 	"github.com/stretchr/testify/require"
 
 	"github.com/dinorain/pinjembuku/config"
-	"github.com/dinorain/pinjembuku/internal/middlewares"
-	"github.com/dinorain/pinjembuku/internal/models"
 	"github.com/dinorain/pinjembuku/internal/librarian/delivery/http/dto"
 	"github.com/dinorain/pinjembuku/internal/librarian/mock"
+	"github.com/dinorain/pinjembuku/internal/middlewares"
+	"github.com/dinorain/pinjembuku/internal/models"
 	mockSessUC "github.com/dinorain/pinjembuku/internal/session/mock"
 	"github.com/dinorain/pinjembuku/pkg/converter"
 	"github.com/dinorain/pinjembuku/pkg/logger"
@@ -45,10 +45,10 @@ func TestLibrariansHandler_Register(t *testing.T) {
 	handlers := NewLibrarianHandlersHTTP(e.Group("librarian"), appLogger, cfg, mw, v, librarianUC, sessUC)
 
 	reqDto := &dto.LibrarianRegisterRequestDto{
-		Email:         "email@gmail.com",
-		FirstName:     "FirstName",
-		LastName:      "LastName",
-		Password:      "123456",
+		Email:     "email@gmail.com",
+		FirstName: "FirstName",
+		LastName:  "LastName",
+		Password:  "123456",
 	}
 
 	buf := &bytes.Buffer{}
@@ -102,11 +102,11 @@ func TestLibrariansHandler_Login(t *testing.T) {
 	ctx := e.NewContext(req, res)
 
 	mockLibrarian := &models.Librarian{
-		LibrarianID:      uuid.New(),
-		Email:         "email@gmail.com",
-		FirstName:     "FirstName",
-		LastName:      "LastName",
-		Password:      "123456",
+		LibrarianID: uuid.New(),
+		Email:       "email@gmail.com",
+		FirstName:   "FirstName",
+		LastName:    "LastName",
+		Password:    "123456",
 	}
 
 	librarianUC.EXPECT().Login(gomock.Any(), reqDto.Email, reqDto.Password).AnyTimes().Return(mockLibrarian, nil)
@@ -140,11 +140,11 @@ func TestLibrariansHandler_FindAll(t *testing.T) {
 
 	var librarians []models.Librarian
 	librarians = append(librarians, models.Librarian{
-		LibrarianID:      uuid.New(),
-		Email:         "email@gmail.com",
-		FirstName:     "FirstName",
-		LastName:      "LastName",
-		Password:      "123456",
+		LibrarianID: uuid.New(),
+		Email:       "email@gmail.com",
+		FirstName:   "FirstName",
+		LastName:    "LastName",
+		Password:    "123456",
 	})
 
 	librarianUC.EXPECT().FindAll(gomock.Any(), gomock.Any()).AnyTimes().Return(librarians, nil)
@@ -202,10 +202,10 @@ func TestLibrariansHandler_UpdateById(t *testing.T) {
 
 	change := "changed"
 	reqDto := &dto.LibrarianUpdateRequestDto{
-		FirstName:     &change,
-		LastName:      &change,
-		Password:      &change,
-		Avatar:        &change,
+		FirstName: &change,
+		LastName:  &change,
+		Password:  &change,
+		Avatar:    &change,
 	}
 
 	buf := &bytes.Buffer{}

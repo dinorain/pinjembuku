@@ -1,4 +1,166 @@
 definitions:
+  dto.BookFindResponseDto:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/dto.BookReponseDto'
+        type: array
+      meta:
+        $ref: '#/definitions/utils.PaginationMetaDto'
+    type: object
+  dto.BookReponseDto:
+    properties:
+      cover_id:
+        type: number
+      edition_count:
+        type: string
+      key:
+        type: string
+      name:
+        type: string
+    type: object
+  dto.LibrarianFindResponseDto:
+    properties:
+      data: {}
+      meta:
+        $ref: '#/definitions/utils.PaginationMetaDto'
+    type: object
+  dto.LibrarianLoginRequestDto:
+    properties:
+      email:
+        maxLength: 60
+        type: string
+      password:
+        type: string
+    required:
+    - email
+    - password
+    type: object
+  dto.LibrarianLoginResponseDto:
+    properties:
+      tokens:
+        $ref: '#/definitions/dto.LibrarianRefreshTokenResponseDto'
+      user_id:
+        type: string
+    required:
+    - tokens
+    - user_id
+    type: object
+  dto.LibrarianRefreshTokenDto:
+    properties:
+      refresh_token:
+        type: string
+    required:
+    - refresh_token
+    type: object
+  dto.LibrarianRefreshTokenResponseDto:
+    properties:
+      access_token:
+        type: string
+      refresh_token:
+        type: string
+    required:
+    - access_token
+    - refresh_token
+    type: object
+  dto.LibrarianRegisterRequestDto:
+    properties:
+      email:
+        maxLength: 60
+        type: string
+      first_name:
+        maxLength: 30
+        type: string
+      last_name:
+        maxLength: 30
+        type: string
+      password:
+        type: string
+    required:
+    - email
+    - first_name
+    - last_name
+    - password
+    type: object
+  dto.LibrarianRegisterResponseDto:
+    properties:
+      user_id:
+        type: string
+    required:
+    - user_id
+    type: object
+  dto.LibrarianResponseDto:
+    properties:
+      avatar:
+        type: string
+      created_at:
+        type: string
+      email:
+        type: string
+      first_name:
+        type: string
+      last_name:
+        type: string
+      librarian_id:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  dto.LibrarianUpdateRequestDto:
+    properties:
+      avatar:
+        type: string
+      first_name:
+        maxLength: 30
+        type: string
+      last_name:
+        maxLength: 30
+        type: string
+      password:
+        type: string
+    type: object
+  dto.OrderCreateRequestDto:
+    properties:
+      key:
+        type: string
+      pickup_schedule:
+        type: string
+    required:
+    - key
+    - pickup_schedule
+    type: object
+  dto.OrderCreateResponseDto:
+    properties:
+      order_id:
+        type: string
+    required:
+    - order_id
+    type: object
+  dto.OrderFindResponseDto:
+    properties:
+      data: {}
+      meta:
+        $ref: '#/definitions/utils.PaginationMetaDto'
+    type: object
+  dto.OrderResponseDto:
+    properties:
+      created_at:
+        type: string
+      item:
+        $ref: '#/definitions/models.OrderItem'
+      librarian_id:
+        type: string
+      order_id:
+        type: string
+      pickup_schedule:
+        type: string
+      status:
+        type: string
+      updated_at:
+        type: string
+      user_id:
+        type: string
+    type: object
   dto.UserFindResponseDto:
     properties:
       data: {}
@@ -104,6 +266,17 @@ definitions:
       password:
         type: string
     type: object
+  models.OrderItem:
+    properties:
+      cover_id:
+        type: number
+      edition_count:
+        type: string
+      key:
+        type: string
+      name:
+        type: string
+    type: object
   utils.PaginationMetaDto:
     properties:
       limit:
@@ -119,6 +292,310 @@ info:
     name: Dustin Jourdan
     url: https://github.com/dinorain
 paths:
+  /book:
+    get:
+      consumes:
+      - application/json
+      description: Find all books of certain subject
+      parameters:
+      - description: pagination size
+        in: query
+        name: size
+        type: string
+      - description: pagination page
+        in: query
+        name: page
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.BookFindResponseDto'
+      security:
+      - ApiKeyAuth: []
+      summary: Find all books of certain subject
+      tags:
+      - Books
+  /librarian:
+    get:
+      consumes:
+      - application/json
+      description: Admin find all librarians
+      parameters:
+      - description: pagination size
+        in: query
+        name: size
+        type: string
+      - description: pagination page
+        in: query
+        name: page
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.LibrarianFindResponseDto'
+      security:
+      - ApiKeyAuth: []
+      summary: Find all librarians
+      tags:
+      - Librarians
+    post:
+      consumes:
+      - application/json
+      description: Admin create librarian
+      parameters:
+      - description: Payload
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/dto.LibrarianRegisterRequestDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.LibrarianRegisterResponseDto'
+      security:
+      - ApiKeyAuth: []
+      summary: To register librarian
+      tags:
+      - Librarians
+  /librarian/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete existing librarian, admin only
+      parameters:
+      - description: Librarian ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      security:
+      - ApiKeyAuth: []
+      summary: Delete librarian
+      tags:
+      - Librarians
+    get:
+      consumes:
+      - application/json
+      description: Find existing librarian by id
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.LibrarianResponseDto'
+      security:
+      - ApiKeyAuth: []
+      summary: Find librarian
+      tags:
+      - Librarians
+    put:
+      consumes:
+      - application/json
+      description: Update existing librarian
+      parameters:
+      - description: Librarian ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Payload
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/dto.LibrarianUpdateRequestDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.LibrarianResponseDto'
+      security:
+      - ApiKeyAuth: []
+      summary: Update librarian
+      tags:
+      - Librarians
+  /librarian/login:
+    post:
+      consumes:
+      - application/json
+      description: Librarian login with email and password
+      parameters:
+      - description: Payload
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/dto.LibrarianLoginRequestDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.LibrarianLoginResponseDto'
+      summary: Librarian login
+      tags:
+      - Librarians
+  /librarian/logout:
+    post:
+      consumes:
+      - application/json
+      description: Delete current session
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+      security:
+      - ApiKeyAuth: []
+      summary: Librarian logout
+      tags:
+      - Librarians
+  /librarian/me:
+    get:
+      consumes:
+      - application/json
+      description: Get session id from token, find librarian by uuid and returns it
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.LibrarianResponseDto'
+      security:
+      - ApiKeyAuth: []
+      summary: Find me
+      tags:
+      - Librarians
+  /librarian/refresh:
+    post:
+      consumes:
+      - application/json
+      description: Refresh access token
+      parameters:
+      - description: Payload
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/dto.LibrarianRefreshTokenDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.LibrarianRefreshTokenResponseDto'
+      summary: Refresh access token
+      tags:
+      - Librarians
+  /order:
+    get:
+      consumes:
+      - application/json
+      description: Find all orders
+      parameters:
+      - description: pagination size
+        in: query
+        name: size
+        type: string
+      - description: pagination page
+        in: query
+        name: page
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.OrderFindResponseDto'
+      security:
+      - ApiKeyAuth: []
+      summary: Find all orders
+      tags:
+      - Orders
+    post:
+      consumes:
+      - application/json
+      description: Admin create order
+      parameters:
+      - description: Payload
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/dto.OrderCreateRequestDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.OrderCreateResponseDto'
+      security:
+      - ApiKeyAuth: []
+      summary: To register order
+      tags:
+      - Orders
+  /order/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Find existing order by id
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.OrderResponseDto'
+      security:
+      - ApiKeyAuth: []
+      summary: Find order
+      tags:
+      - Orders
+    put:
+      consumes:
+      - application/json
+      description: Librarian accept order
+      parameters:
+      - description: Order ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.OrderResponseDto'
+      security:
+      - ApiKeyAuth: []
+      summary: Accept order
+      tags:
+      - Orders
   /user:
     get:
       consumes:

@@ -10,14 +10,14 @@ import (
 
 // Librarian model
 type Librarian struct {
-	LibrarianID      uuid.UUID `json:"seller_id" db:"seller_id"`
-	Email         string    `json:"email" db:"email"`
-	FirstName     string    `json:"first_name" db:"first_name"`
-	LastName      string    `json:"last_name" db:"last_name"`
-	Avatar        *string   `json:"avatar" db:"avatar"`
-	Password      string    `json:"-" db:"password"`
-	CreatedAt     time.Time `json:"created_at,omitempty" db:"created_at"`
-	UpdatedAt     time.Time `json:"updated_at,omitempty" db:"updated_at"`
+	LibrarianID uuid.UUID `json:"librarian_id" db:"librarian_id"`
+	Email       string    `json:"email" db:"email"`
+	FirstName   string    `json:"first_name" db:"first_name"`
+	LastName    string    `json:"last_name" db:"last_name"`
+	Avatar      *string   `json:"avatar" db:"avatar"`
+	Password    string    `json:"-" db:"password"`
+	CreatedAt   time.Time `json:"created_at,omitempty" db:"created_at"`
+	UpdatedAt   time.Time `json:"updated_at,omitempty" db:"updated_at"`
 }
 
 func (s *Librarian) SanitizePassword() {

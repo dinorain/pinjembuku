@@ -1,4 +1,4 @@
-### Useraja: Golang auth microservice example
+### Pinjembuku: Golang microservice example for book renting
 
 #### What have been used:
 * [sqlx](https://github.com/jmoiron/sqlx) - Extensions to database/sql.
@@ -13,7 +13,7 @@
 * [gomock](https://github.com/golang/mock) - Mocking framework
 * [CompileDaemon](https://github.com/githubnemo/CompileDaemon) - Compile daemon for Go
 * [Docker](https://www.docker.com/) - Docker
-* [GRPC](https://grpc.io/) - GRPC (Still in progress)
+* [GRPC](https://grpc.io/) - GRPC
 
 #### Docker compose files:
     docker-compose.local.yml - run postgresql, redis, aws, prometheus, grafana containers
@@ -38,6 +38,6 @@ curl -X POST                                                   \
         	"email": "admin@gmail.com",
         	"password": "admin"
         }' \
-    http://172.104.58.183:5001/swagger/index.html#/Users/post_user_login
+    http://localhost:5001/swagger/index.html#/Users/post_user_login
 ```
 

@@ -78,12 +78,12 @@ func (mw *middlewareManager) IsLibrarian(next echo.HandlerFunc) echo.HandlerFunc
 			mw.logger.Warnf("jwt.MapClaims: %+v", c.Get("user"))
 			return errors.New("invalid token header")
 		}
-		sellerID, ok := claims["librarian_id"].(string)
+		librarianID, ok := claims["librarian_id"].(string)
 		if !ok {
 			mw.logger.Warnf("librarian_id: %+v", claims)
 		}
 
-		if sellerID == "" {
+		if librarianID == "" {
 			return httpErrors.NewForbiddenError(c, nil, mw.cfg.Http.DebugErrorsResponse)
 		}
 

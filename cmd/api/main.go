@@ -50,6 +50,6 @@ func main() {
 	}
 	defer psqlDB.Close()
 
-	authServer := server.NewAuthServer(appLogger, cfg, psqlDB, redisClient)
+	authServer := server.NewAppServer(appLogger, cfg, psqlDB, redisClient)
 	appLogger.Fatal(authServer.Run())
 }

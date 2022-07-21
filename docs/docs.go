@@ -20,6 +20,494 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/book": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Find all books of certain subject",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Find all books of certain subject",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "pagination size",
+                        "name": "size",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "pagination page",
+                        "name": "page",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dto.BookFindResponseDto"
+                        }
+                    }
+                }
+            }
+        },
+        "/librarian": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Admin find all librarians",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Librarians"
+                ],
+                "summary": "Find all librarians",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "pagination size",
+                        "name": "size",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "pagination page",
+                        "name": "page",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dto.LibrarianFindResponseDto"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Admin create librarian",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Librarians"
+                ],
+                "summary": "To register librarian",
+                "parameters": [
+                    {
+                        "description": "Payload",
+                        "name": "payload",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.LibrarianRegisterRequestDto"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dto.LibrarianRegisterResponseDto"
+                        }
+                    }
+                }
+            }
+        },
+        "/librarian/login": {
+            "post": {
+                "description": "Librarian login with email and password",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Librarians"
+                ],
+                "summary": "Librarian login",
+                "parameters": [
+                    {
+                        "description": "Payload",
+                        "name": "payload",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.LibrarianLoginRequestDto"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dto.LibrarianLoginResponseDto"
+                        }
+                    }
+                }
+            }
+        },
+        "/librarian/logout": {
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Delete current session",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Librarians"
+                ],
+                "summary": "Librarian logout",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/librarian/me": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Get session id from token, find librarian by uuid and returns it",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Librarians"
+                ],
+                "summary": "Find me",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dto.LibrarianResponseDto"
+                        }
+                    }
+                }
+            }
+        },
+        "/librarian/refresh": {
+            "post": {
+                "description": "Refresh access token",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Librarians"
+                ],
+                "summary": "Refresh access token",
+                "parameters": [
+                    {
+                        "description": "Payload",
+                        "name": "payload",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.LibrarianRefreshTokenDto"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dto.LibrarianRefreshTokenResponseDto"
+                        }
+                    }
+                }
+            }
+        },
+        "/librarian/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Find existing librarian by id",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Librarians"
+                ],
+                "summary": "Find librarian",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dto.LibrarianResponseDto"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Update existing librarian",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Librarians"
+                ],
+                "summary": "Update librarian",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Librarian ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Payload",
+                        "name": "payload",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.LibrarianUpdateRequestDto"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dto.LibrarianResponseDto"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Delete existing librarian, admin only",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Librarians"
+                ],
+                "summary": "Delete librarian",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Librarian ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/order": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Find all orders",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Find all orders",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "pagination size",
+                        "name": "size",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "pagination page",
+                        "name": "page",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dto.OrderFindResponseDto"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Admin create order",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "To register order",
+                "parameters": [
+                    {
+                        "description": "Payload",
+                        "name": "payload",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.OrderCreateRequestDto"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dto.OrderCreateResponseDto"
+                        }
+                    }
+                }
+            }
+        },
+        "/order/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Find existing order by id",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Find order",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dto.OrderResponseDto"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Librarian accept order",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Accept order",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Order ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dto.OrderResponseDto"
+                        }
+                    }
+                }
+            }
+        },
         "/user": {
             "get": {
                 "security": [
@@ -326,6 +814,249 @@ const docTemplate = `{
         }
     },
     "definitions": {
+        "dto.BookFindResponseDto": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.BookReponseDto"
+                    }
+                },
+                "meta": {
+                    "$ref": "#/definitions/utils.PaginationMetaDto"
+                }
+            }
+        },
+        "dto.BookReponseDto": {
+            "type": "object",
+            "properties": {
+                "cover_id": {
+                    "type": "number"
+                },
+                "edition_count": {
+                    "type": "string"
+                },
+                "key": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "dto.LibrarianFindResponseDto": {
+            "type": "object",
+            "properties": {
+                "data": {},
+                "meta": {
+                    "$ref": "#/definitions/utils.PaginationMetaDto"
+                }
+            }
+        },
+        "dto.LibrarianLoginRequestDto": {
+            "type": "object",
+            "required": [
+                "email",
+                "password"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "maxLength": 60
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "dto.LibrarianLoginResponseDto": {
+            "type": "object",
+            "required": [
+                "tokens",
+                "user_id"
+            ],
+            "properties": {
+                "tokens": {
+                    "$ref": "#/definitions/dto.LibrarianRefreshTokenResponseDto"
+                },
+                "user_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "dto.LibrarianRefreshTokenDto": {
+            "type": "object",
+            "required": [
+                "refresh_token"
+            ],
+            "properties": {
+                "refresh_token": {
+                    "type": "string"
+                }
+            }
+        },
+        "dto.LibrarianRefreshTokenResponseDto": {
+            "type": "object",
+            "required": [
+                "access_token",
+                "refresh_token"
+            ],
+            "properties": {
+                "access_token": {
+                    "type": "string"
+                },
+                "refresh_token": {
+                    "type": "string"
+                }
+            }
+        },
+        "dto.LibrarianRegisterRequestDto": {
+            "type": "object",
+            "required": [
+                "email",
+                "first_name",
+                "last_name",
+                "password"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "maxLength": 60
+                },
+                "first_name": {
+                    "type": "string",
+                    "maxLength": 30
+                },
+                "last_name": {
+                    "type": "string",
+                    "maxLength": 30
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "dto.LibrarianRegisterResponseDto": {
+            "type": "object",
+            "required": [
+                "user_id"
+            ],
+            "properties": {
+                "user_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "dto.LibrarianResponseDto": {
+            "type": "object",
+            "properties": {
+                "avatar": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "first_name": {
+                    "type": "string"
+                },
+                "last_name": {
+                    "type": "string"
+                },
+                "librarian_id": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "dto.LibrarianUpdateRequestDto": {
+            "type": "object",
+            "properties": {
+                "avatar": {
+                    "type": "string"
+                },
+                "first_name": {
+                    "type": "string",
+                    "maxLength": 30
+                },
+                "last_name": {
+                    "type": "string",
+                    "maxLength": 30
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "dto.OrderCreateRequestDto": {
+            "type": "object",
+            "required": [
+                "key",
+                "pickup_schedule"
+            ],
+            "properties": {
+                "key": {
+                    "type": "string"
+                },
+                "pickup_schedule": {
+                    "type": "string"
+                }
+            }
+        },
+        "dto.OrderCreateResponseDto": {
+            "type": "object",
+            "required": [
+                "order_id"
+            ],
+            "properties": {
+                "order_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "dto.OrderFindResponseDto": {
+            "type": "object",
+            "properties": {
+                "data": {},
+                "meta": {
+                    "$ref": "#/definitions/utils.PaginationMetaDto"
+                }
+            }
+        },
+        "dto.OrderResponseDto": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string"
+                },
+                "item": {
+                    "$ref": "#/definitions/models.OrderItem"
+                },
+                "librarian_id": {
+                    "type": "string"
+                },
+                "order_id": {
+                    "type": "string"
+                },
+                "pickup_schedule": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "string"
+                }
+            }
+        },
         "dto.UserFindResponseDto": {
             "type": "object",
             "properties": {
@@ -477,6 +1208,23 @@ const docTemplate = `{
                     "maxLength": 30
                 },
                 "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.OrderItem": {
+            "type": "object",
+            "properties": {
+                "cover_id": {
+                    "type": "number"
+                },
+                "edition_count": {
+                    "type": "string"
+                },
+                "key": {
+                    "type": "string"
+                },
+                "name": {
                     "type": "string"
                 }
             }
