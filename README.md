@@ -28,7 +28,7 @@
 
 ### Swagger:
 
-http://localhost:5001/swagger/
+http://localhost:5001/swagger/ or http://139.162.7.112:5001/swagger/ (Test)
 
 ### Test (Admin Login):
 
@@ -38,6 +38,27 @@ curl -X POST                                                   \
         	"email": "admin@gmail.com",
         	"password": "admin"
         }' \
-    http://localhost:5001/swagger/index.html#/Users/post_user_login
+    http://139.162.7.112:5001/swagger/index.html#/Users/post_user_login
 ```
 
+### Test (Librarian Login):
+
+```sh
+curl -X POST                                                   \
+    -d '{
+        	"email": "librarian@gmail.com",
+        	"password": "librarian"
+        }' \
+    http://139.162.7.112:5001/swagger/index.html#/Librarians/post_librarian_login
+```
+
+### Test (User Login):
+
+```sh
+curl -X POST                                                   \
+    -d '{
+        	"email": "djourdan555@gmail.com",
+        	"password": "hello"
+        }' \
+    http://139.162.7.112:5001/swagger/index.html#/Users/post_user_login
+```

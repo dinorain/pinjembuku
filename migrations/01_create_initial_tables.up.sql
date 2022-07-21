@@ -19,8 +19,8 @@ CREATE TABLE users
     updated_at TIMESTAMP WITH TIME ZONE          DEFAULT CURRENT_TIMESTAMP
 );
 
-DROP TABLE IF EXISTS sellers CASCADE;
-CREATE TABLE sellers
+DROP TABLE IF EXISTS librarians CASCADE;
+CREATE TABLE librarians
 (
     librarian_id  UUID PRIMARY KEY                  DEFAULT uuid_generate_v4(),
     first_name VARCHAR(32)              NOT NULL CHECK ( first_name <> '' ),
@@ -38,7 +38,7 @@ CREATE TABLE orders
 (
     order_id    UUID PRIMARY KEY                  DEFAULT uuid_generate_v4(),
     user_id     UUID REFERENCES users (user_id),
-    librarian_id   UUID REFERENCES sellers (librarian_id),
+    librarian_id   UUID REFERENCES librarians (librarian_id),
     item        JSONB,
     status      status        NOT NULL DEFAULT 'pending',
 

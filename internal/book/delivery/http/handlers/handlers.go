@@ -75,6 +75,7 @@ func (h *bookHandlersHTTP) FindBySubject() echo.HandlerFunc {
 				EditionCount:    book.EditionCount,
 				CoverID:         book.CoverID,
 				CoverEditionKey: book.CoverEditionKey,
+				Authors: book.Authors,
 			})
 		}
 

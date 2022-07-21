@@ -1,7 +1,13 @@
-package models
+package dto
 
-// Book model
-type Book struct {
+import "github.com/dinorain/pinjembuku/pkg/utils"
+
+type BookFindResponseDto struct {
+	Meta utils.PaginationMetaDto `json:"meta"`
+	Data []BookReponseDto        `json:"data"`
+}
+
+type BookReponseDto struct {
 	BookKey         string       `json:"key"`
 	Title           string       `json:"title"`
 	EditionCount    int          `json:"edition_count"`

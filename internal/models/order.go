@@ -21,7 +21,7 @@ type Order struct {
 	LibrarianID    *uuid.UUID `json:"librarian_id" db:"librarian_id"`
 	Item           OrderItem  `json:"item" db:"item"`
 	Status         string     `json:"status" db:"status"`
-	PickupSchedule time.Time  `json:"pickup_schedule,omitempty" db:"created_at"`
+	PickupSchedule time.Time  `json:"pickup_schedule,omitempty" db:"pickup_schedule"`
 	CreatedAt      time.Time  `json:"created_at,omitempty" db:"created_at"`
 	UpdatedAt      time.Time  `json:"updated_at,omitempty" db:"updated_at"`
 }

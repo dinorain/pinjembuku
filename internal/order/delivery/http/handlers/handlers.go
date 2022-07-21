@@ -146,15 +146,7 @@ func (h *orderHandlersHTTP) FindAll() echo.HandlerFunc {
 			h.logger.Errorf("getSessionIDFromCtx: %v", err)
 			return httpErrors.ErrorCtxResponse(c, err, h.cfg.Http.DebugErrorsResponse)
 		}
-		if role == "" {
-			userUUID, _ := uuid.Parse(userID)
-			if res, err := h.orderUC.FindAllByLibrarianId(ctx, userUUID, pq); err != nil {
-				h.logger.Errorf("orderUC.FindAllByLibrarianId: %v", err)
-				return httpErrors.ErrorCtxResponse(c, err, h.cfg.Http.DebugErrorsResponse)
-			} else {
-				orders = res
-			}
-		} else if role == models.UserRoleUser {
+		if role == models.UserRoleUser {
 			userUUID, _ := uuid.Parse(userID)
 			if res, err := h.orderUC.FindAllByUserId(ctx, userUUID, pq); err != nil {
 				h.logger.Errorf("orderUC.FindAllByUserId: %v", err)
@@ -251,16 +243,18 @@ func (h *orderHandlersHTTP) AcceptById() echo.HandlerFunc {
 			return httpErrors.NewForbiddenError(c, nil, h.cfg.Http.DebugErrorsResponse)
 		}
 
-		if userID != order.LibrarianID.String() {
-			return httpErrors.NewForbiddenError(c, nil, h.cfg.Http.DebugErrorsResponse)
-		}
-
 		order, err = h.updateReqToOrderModel(order, updateDto)
 		if err != nil {
 			h.logger.Errorf("orderHandlersHTTP.updateReqToOrderModel: %v", err)
 			return httpErrors.ErrorCtxResponse(c, err, h.cfg.Http.DebugErrorsResponse)
 		}
 
+		if librarianUUID, err := uuid.Parse(userID); err != nil {
+			h.logger.Errorf("uuid.Parse: %v", err)
+			return httpErrors.ErrorCtxResponse(c, err, h.cfg.Http.DebugErrorsResponse)
+		} else {
+			order.LibrarianID = &librarianUUID
+		}
 		order, err = h.orderUC.UpdateById(ctx, order)
 		if err != nil {
 			h.logger.Errorf("orderUC.UpdateById: %v", err)
