@@ -12,14 +12,14 @@ import (
 	"github.com/jmoiron/sqlx"
 	"github.com/labstack/echo/v4"
 
-	"github.com/dinorain/useraja/config"
-	"github.com/dinorain/useraja/internal/middlewares"
-	sessRepository "github.com/dinorain/useraja/internal/session/repository"
-	sessUseCase "github.com/dinorain/useraja/internal/session/usecase"
-	userDeliveryHTTP "github.com/dinorain/useraja/internal/user/delivery/http/handlers"
-	userRepository "github.com/dinorain/useraja/internal/user/repository"
-	userUseCase "github.com/dinorain/useraja/internal/user/usecase"
-	"github.com/dinorain/useraja/pkg/logger"
+	"github.com/dinorain/pinjembuku/config"
+	"github.com/dinorain/pinjembuku/internal/middlewares"
+	sessRepository "github.com/dinorain/pinjembuku/internal/session/repository"
+	sessUseCase "github.com/dinorain/pinjembuku/internal/session/usecase"
+	userDeliveryHTTP "github.com/dinorain/pinjembuku/internal/user/delivery/http/handlers"
+	userRepository "github.com/dinorain/pinjembuku/internal/user/repository"
+	userUseCase "github.com/dinorain/pinjembuku/internal/user/usecase"
+	"github.com/dinorain/pinjembuku/pkg/logger"
 )
 
 type Server struct {

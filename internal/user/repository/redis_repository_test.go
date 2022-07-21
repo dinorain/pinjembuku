@@ -10,7 +10,7 @@ import (
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/require"
 
-	"github.com/dinorain/useraja/internal/models"
+	"github.com/dinorain/pinjembuku/internal/models"
 )
 
 func SetupRedis() *userRedisRepo {

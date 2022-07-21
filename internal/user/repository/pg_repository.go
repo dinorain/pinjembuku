@@ -8,9 +8,9 @@ import (
 	"github.com/jmoiron/sqlx"
 	"github.com/pkg/errors"
 
-	"github.com/dinorain/useraja/internal/models"
-	"github.com/dinorain/useraja/internal/user"
-	"github.com/dinorain/useraja/pkg/utils"
+	"github.com/dinorain/pinjembuku/internal/models"
+	"github.com/dinorain/pinjembuku/internal/user"
+	"github.com/dinorain/pinjembuku/pkg/utils"
 )
 
 // User repository

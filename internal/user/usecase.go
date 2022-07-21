@@ -6,8 +6,8 @@ import (
 
 	"github.com/google/uuid"
 
-	"github.com/dinorain/useraja/internal/models"
-	"github.com/dinorain/useraja/pkg/utils"
+	"github.com/dinorain/pinjembuku/internal/models"
+	"github.com/dinorain/pinjembuku/pkg/utils"
 )
 
 //  User UseCase interface

@@ -9,15 +9,17 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 
-	"github.com/dinorain/useraja/config"
-	"github.com/dinorain/useraja/internal/models"
-	httpErrors "github.com/dinorain/useraja/pkg/http_errors"
-	"github.com/dinorain/useraja/pkg/logger"
+	"github.com/dinorain/pinjembuku/config"
+	"github.com/dinorain/pinjembuku/internal/models"
+	httpErrors "github.com/dinorain/pinjembuku/pkg/http_errors"
+	"github.com/dinorain/pinjembuku/pkg/logger"
 )
 
 type MiddlewareManager interface {
 	RequestLoggerMiddleware(next echo.HandlerFunc) echo.HandlerFunc
 	IsLoggedIn() echo.MiddlewareFunc
+	IsLibrarian(next echo.HandlerFunc) echo.HandlerFunc
+	IsUser(next echo.HandlerFunc) echo.HandlerFunc
 	IsAdmin(next echo.HandlerFunc) echo.HandlerFunc
 }
 
@@ -50,13 +52,64 @@ func (mw *middlewareManager) IsAdmin(next echo.HandlerFunc) echo.HandlerFunc {
 			mw.logger.Warnf("jwt.MapClaims: %+v", c.Get("user"))
 			return errors.New("invalid token header")
 		}
+
 		role, ok := claims["role"].(string)
 		if !ok {
-			mw.logger.Warnf("role: %v", claims)
-			return errors.New("invalid token header")
+			mw.logger.Warnf("role: %+v", claims)
 		}
 
 		if role != models.UserRoleAdmin {
+			return httpErrors.NewForbiddenError(c, nil, mw.cfg.Http.DebugErrorsResponse)
+		}
+
+		return next(c)
+	}
+}
+
+func (mw *middlewareManager) IsLibrarian(next echo.HandlerFunc) echo.HandlerFunc {
+	return func(c echo.Context) error {
+		user, ok := c.Get("user").(*jwt.Token)
+		if !ok {
+			mw.logger.Warnf("jwt.Token: %+v", c.Get("user"))
+			return errors.New("invalid token header")
+		}
+		claims := user.Claims.(jwt.MapClaims)
+		if !ok {
+			mw.logger.Warnf("jwt.MapClaims: %+v", c.Get("user"))
+			return errors.New("invalid token header")
+		}
+		sellerID, ok := claims["librarian_id"].(string)
+		if !ok {
+			mw.logger.Warnf("librarian_id: %+v", claims)
+		}
+
+		if sellerID == "" {
+			return httpErrors.NewForbiddenError(c, nil, mw.cfg.Http.DebugErrorsResponse)
+		}
+
+		return next(c)
+	}
+}
+
+func (mw *middlewareManager) IsUser(next echo.HandlerFunc) echo.HandlerFunc {
+	return func(c echo.Context) error {
+		user, ok := c.Get("user").(*jwt.Token)
+		if !ok {
+			mw.logger.Warnf("jwt.Token: %+v", c.Get("user"))
+			return errors.New("invalid token header")
+		}
+		claims := user.Claims.(jwt.MapClaims)
+		if !ok {
+			mw.logger.Warnf("jwt.MapClaims: %+v", c.Get("user"))
+			return errors.New("invalid token header")
+		}
+
+		role, ok := claims["role"].(string)
+		if !ok {
+			mw.logger.Warnf("role: %+v", claims)
+		}
+
+		if role != models.UserRoleUser {
 			return httpErrors.NewForbiddenError(c, nil, mw.cfg.Http.DebugErrorsResponse)
 		}
 

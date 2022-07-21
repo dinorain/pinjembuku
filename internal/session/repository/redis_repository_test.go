@@ -10,8 +10,8 @@ import (
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/require"
 
-	"github.com/dinorain/useraja/internal/models"
-	"github.com/dinorain/useraja/internal/session"
+	"github.com/dinorain/pinjembuku/internal/models"
+	"github.com/dinorain/pinjembuku/internal/session"
 )
 
 func SetupRedis() session.SessRepository {

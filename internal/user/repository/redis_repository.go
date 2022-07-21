@@ -8,9 +8,9 @@ import (
 
 	"github.com/go-redis/redis/v8"
 
-	"github.com/dinorain/useraja/internal/models"
-	"github.com/dinorain/useraja/internal/user"
-	"github.com/dinorain/useraja/pkg/logger"
+	"github.com/dinorain/pinjembuku/internal/models"
+	"github.com/dinorain/pinjembuku/internal/user"
+	"github.com/dinorain/pinjembuku/pkg/logger"
 )
 
 // Auth redis repository

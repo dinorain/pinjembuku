@@ -1,10 +1,10 @@
 package service
 
 import (
-	"github.com/dinorain/useraja/config"
-	"github.com/dinorain/useraja/internal/session"
-	"github.com/dinorain/useraja/internal/user"
-	"github.com/dinorain/useraja/pkg/logger"
+	"github.com/dinorain/pinjembuku/config"
+	"github.com/dinorain/pinjembuku/internal/session"
+	"github.com/dinorain/pinjembuku/internal/user"
+	"github.com/dinorain/pinjembuku/pkg/logger"
 )
 
 type usersServiceGRPC struct {

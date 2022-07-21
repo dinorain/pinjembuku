@@ -4,7 +4,7 @@ package user
 import (
 	"context"
 
-	"github.com/dinorain/useraja/internal/models"
+	"github.com/dinorain/pinjembuku/internal/models"
 )
 
 // User Redis repository interface

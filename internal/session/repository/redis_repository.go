@@ -10,9 +10,9 @@ import (
 	"github.com/google/uuid"
 	"github.com/pkg/errors"
 
-	"github.com/dinorain/useraja/config"
-	"github.com/dinorain/useraja/internal/models"
-	"github.com/dinorain/useraja/internal/session"
+	"github.com/dinorain/pinjembuku/config"
+	"github.com/dinorain/pinjembuku/internal/models"
+	"github.com/dinorain/pinjembuku/internal/session"
 )
 
 const (

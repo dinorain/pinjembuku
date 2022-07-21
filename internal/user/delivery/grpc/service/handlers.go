@@ -11,10 +11,10 @@ import (
 	"google.golang.org/grpc/status"
 	"google.golang.org/protobuf/types/known/timestamppb"
 
-	"github.com/dinorain/useraja/internal/models"
-	"github.com/dinorain/useraja/pkg/grpc_errors"
-	"github.com/dinorain/useraja/pkg/utils"
-	userService "github.com/dinorain/useraja/proto"
+	"github.com/dinorain/pinjembuku/internal/models"
+	"github.com/dinorain/pinjembuku/pkg/grpc_errors"
+	"github.com/dinorain/pinjembuku/pkg/utils"
+	userService "github.com/dinorain/pinjembuku/proto"
 )
 
 // Register new user

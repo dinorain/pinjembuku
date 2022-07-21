@@ -17,14 +17,14 @@ import (
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/stretchr/testify/require"
 
-	"github.com/dinorain/useraja/config"
-	"github.com/dinorain/useraja/internal/middlewares"
-	"github.com/dinorain/useraja/internal/models"
-	mockSessUC "github.com/dinorain/useraja/internal/session/mock"
-	"github.com/dinorain/useraja/internal/user/delivery/http/dto"
-	"github.com/dinorain/useraja/internal/user/mock"
-	"github.com/dinorain/useraja/pkg/converter"
-	"github.com/dinorain/useraja/pkg/logger"
+	"github.com/dinorain/pinjembuku/config"
+	"github.com/dinorain/pinjembuku/internal/middlewares"
+	"github.com/dinorain/pinjembuku/internal/models"
+	mockSessUC "github.com/dinorain/pinjembuku/internal/session/mock"
+	"github.com/dinorain/pinjembuku/internal/user/delivery/http/dto"
+	"github.com/dinorain/pinjembuku/internal/user/mock"
+	"github.com/dinorain/pinjembuku/pkg/converter"
+	"github.com/dinorain/pinjembuku/pkg/logger"
 )
 
 func TestUsersService_Register(t *testing.T) {

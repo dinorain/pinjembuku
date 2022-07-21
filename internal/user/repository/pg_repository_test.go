@@ -10,8 +10,8 @@ import (
 	"github.com/jmoiron/sqlx"
 	"github.com/stretchr/testify/require"
 
-	"github.com/dinorain/useraja/internal/models"
-	"github.com/dinorain/useraja/pkg/utils"
+	"github.com/dinorain/pinjembuku/internal/models"
+	"github.com/dinorain/pinjembuku/pkg/utils"
 )
 
 func TestUserRepository_Create(t *testing.T) {

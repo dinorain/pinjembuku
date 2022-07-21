@@ -4,7 +4,7 @@ package session
 import (
 	"context"
 
-	"github.com/dinorain/useraja/internal/models"
+	"github.com/dinorain/pinjembuku/internal/models"
 )
 
 // Session UseCase

@@ -4,12 +4,12 @@ import (
 	"log"
 	"os"
 
-	"github.com/dinorain/useraja/config"
-	"github.com/dinorain/useraja/internal/server"
-	"github.com/dinorain/useraja/pkg/logger"
-	"github.com/dinorain/useraja/pkg/postgres"
-	"github.com/dinorain/useraja/pkg/redis"
-	"github.com/dinorain/useraja/pkg/utils"
+	"github.com/dinorain/pinjembuku/config"
+	"github.com/dinorain/pinjembuku/internal/server"
+	"github.com/dinorain/pinjembuku/pkg/logger"
+	"github.com/dinorain/pinjembuku/pkg/postgres"
+	"github.com/dinorain/pinjembuku/pkg/redis"
+	"github.com/dinorain/pinjembuku/pkg/utils"
 )
 
 // @contact.name Dustin Jourdan

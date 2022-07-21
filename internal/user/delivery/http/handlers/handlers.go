@@ -12,16 +12,16 @@ import (
 	"github.com/google/uuid"
 	"github.com/labstack/echo/v4"
 
-	"github.com/dinorain/useraja/config"
-	"github.com/dinorain/useraja/internal/middlewares"
-	"github.com/dinorain/useraja/internal/models"
-	"github.com/dinorain/useraja/internal/session"
-	"github.com/dinorain/useraja/internal/user"
-	"github.com/dinorain/useraja/internal/user/delivery/http/dto"
-	"github.com/dinorain/useraja/pkg/constants"
-	httpErrors "github.com/dinorain/useraja/pkg/http_errors"
-	"github.com/dinorain/useraja/pkg/logger"
-	"github.com/dinorain/useraja/pkg/utils"
+	"github.com/dinorain/pinjembuku/config"
+	"github.com/dinorain/pinjembuku/internal/middlewares"
+	"github.com/dinorain/pinjembuku/internal/models"
+	"github.com/dinorain/pinjembuku/internal/session"
+	"github.com/dinorain/pinjembuku/internal/user"
+	"github.com/dinorain/pinjembuku/internal/user/delivery/http/dto"
+	"github.com/dinorain/pinjembuku/pkg/constants"
+	httpErrors "github.com/dinorain/pinjembuku/pkg/http_errors"
+	"github.com/dinorain/pinjembuku/pkg/logger"
+	"github.com/dinorain/pinjembuku/pkg/utils"
 )
 
 type userHandlersHTTP struct {

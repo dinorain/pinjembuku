@@ -3,9 +3,9 @@ package usecase
 import (
 	"context"
 
-	"github.com/dinorain/useraja/config"
-	"github.com/dinorain/useraja/internal/models"
-	"github.com/dinorain/useraja/internal/session"
+	"github.com/dinorain/pinjembuku/config"
+	"github.com/dinorain/pinjembuku/internal/models"
+	"github.com/dinorain/pinjembuku/internal/session"
 )
 
 // Session use case
